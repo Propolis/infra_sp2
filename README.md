@@ -5,47 +5,35 @@ YAMDB - это каталог произведений совмещённый с
 
 ### Как запустить проект:
 
-Клонировать репозиторий и перейти в него в командной строке:
+Пример env:
 
 ```
-git clone git@github.com:Propolis/api_yamdb.git
+DB_ENGINE=django.db.backends.postgresql # указываем, что работаем с postgresql
+DB_NAME=yamd # имя базы данных
+POSTGRES_USER=yamd # логин для подключения к базе данных
+POSTGRES_PASSWORD=123456 # пароль для подключения к БД (установите свой)
+DB_HOST=db # название сервиса (контейнера)
+DB_PORT=5432 # порт для подключения к БД
 ```
 
-```
-cd api_yamdb.git
-```
-
-Cоздать и активировать виртуальное окружение:
+Сборка с запуском контенера:
 
 ```
-python3 -m venv env
-```
-
-```
-source env/bin/activate
-```
-
-Установить зависимости из файла requirements.txt:
-
-```
-python3 -m pip install --upgrade pip
-```
-
-```
-pip install -r requirements.txt
+зайти в в infra и выполнить - docker-compose up -d
 ```
 
 Выполнить миграции:
 
 ```
-python3 manage.py migrate
+docker-compose exec web python manage.py migrate
 ```
 
-Запустить проект:
+Создать суперпользователя
 
 ```
-python3 manage.py runserver
+docker-compose exec web python manage.py createsuperuser
 ```
+Теперь проект доступен по адресу http://localhost/
 
 ### Примеры запросов к api:
 
